@@ -1,0 +1,158 @@
+
+set $term "lilyterm"
+set $browser "firefox"
+
+set $alt Mod1
+set $win Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+set $font "pango:Hack 8"
+font $font
+new_window pixel 3
+workspace_auto_back_and_forth no
+
+
+
+#color scheme (this is the default
+#                       border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+
+
+
+#------------------------------
+#Launcher section
+#------------------------------
+bindsym $win+t exec $term
+bindsym $win+b exec $browser
+bindsym $alt+p exec dmenu_run -l 5 -fn $font
+
+bindsym 0x1008ff11 exec amixer -c 1 set Master 5%-
+bindsym 0x1008ff13 exec amixer -c 1 set Master 5%+
+bindsym 0xff61     exec scrot
+bindsym $win+m exec /home/jesse/bin/muteToggle.sh
+bindsym $win+l exec i3lock -c 000000 && systemctl suspend
+
+bindsym 0x1008ff02 exec "xbacklight -inc 2"
+bindsym 0x1008ff03 exec "xbacklight -dec 2"
+
+
+# kill focused window
+bindsym $alt+Shift+c kill
+bindsym $alt+x kill
+bindsym --whole-window $alt+button2 kill
+
+
+
+# Use Mouse+$alt to drag floating windows to their wanted position
+floating_modifier $alt
+# change focus
+bindsym $alt+h focus left
+bindsym $alt+j focus down
+bindsym $alt+k focus up
+bindsym $alt+l focus right
+
+# move focused window
+bindsym $alt+Shift+h move left
+bindsym $alt+Shift+j move down
+bindsym $alt+Shift+k move up
+bindsym $alt+Shift+l move right
+
+# split in horizontal orientation
+bindsym $alt+t split h
+
+# split in vertical orientation
+bindsym $alt+n split v
+
+# enter fullscreen mode for the focused container
+bindsym $alt+m fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $alt+apostrophe layout stacking
+bindsym $alt+comma layout tabbed
+bindsym $alt+period layout toggle split
+
+# toggle tiling / floating
+bindsym $alt+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $alt+space focus mode_toggle
+
+# focus the parent container
+bindsym $alt+a focus parent
+
+# focus the child container
+bindsym $alt+o focus child
+
+# switch to workspace
+bindsym $alt+1 workspace 1
+bindsym $alt+2 workspace 2
+bindsym $alt+3 workspace 3
+bindsym $alt+4 workspace 4
+bindsym $alt+5 workspace 5
+bindsym $alt+6 workspace 6
+bindsym $alt+7 workspace 7
+bindsym $alt+8 workspace 8
+bindsym $alt+9 workspace 9
+bindsym $alt+0 workspace dennis
+# Ye arrive at Dennis. He wears a sporty frock coat and a long jimberjam. 
+# He paces about nervously. Obvious exits are NOT DENNIS.
+
+bindsym $alt+Left workspace prev
+bindsym $alt+Right workspace next
+
+# move focused container to workspace
+bindsym $alt+Shift+1 move container to workspace 1
+bindsym $alt+Shift+2 move container to workspace 2
+bindsym $alt+Shift+3 move container to workspace 3
+bindsym $alt+Shift+4 move container to workspace 4
+bindsym $alt+Shift+5 move container to workspace 5
+bindsym $alt+Shift+6 move container to workspace 6
+bindsym $alt+Shift+7 move container to workspace 7
+bindsym $alt+Shift+8 move container to workspace 8
+bindsym $alt+Shift+9 move container to workspace 9
+bindsym $alt+Shift+0 move container to workspace dennis
+
+bindsym $alt+Shift+Left move container to workspace prev
+bindsym $alt+Shift+Right move container to workspace next
+
+# reload the configuration file
+#bindsym $alt+Shift+j reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $alt+Shift+p restart
+# exit i3 (logs you out of your X session)
+bindsym $alt+Shift+q exec i3-msg exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+# These bindings trigger as soon as you enter the resize mode
+    bindsym $alt+h resize grow left 10 px or 10 ppt
+        bindsym $alt+j resize grow down 10 px or 10 ppt
+        bindsym $alt+k resize grow up 10 px or 10 ppt
+        bindsym $alt+l resize grow right 10 px or 10 ppt
+
+        bindsym $alt+Shift+h resize shrink right 10 px or 10 ppt
+        bindsym $alt+Shift+j resize shrink up 10 px or 10 ppt
+        bindsym $alt+Shift+k resize shrink down 10 px or 10 ppt
+        bindsym $alt+Shift+l resize shrink left 10 px or 10 ppt
+
+# back to normal: Enter or Escape
+        bindsym Return mode "default" 
+        bindsym Escape mode "default"
+}
+
+bindsym $alt+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    status_command i3status
+}
