@@ -1,0 +1,14 @@
+
+noremap j 3j
+noremap k 3k
+noremap l 2l
+noremap h 2h
+noremap ; :
+noremap : ;
+set hintchars=abcdefghijklmnopqrstuvwxyz
+set gui=navigation
+source! /home/jesse/.vimperatorrc.local
+highlight Hint -append font-size: 12px
+
+map <Left> gT
+map <Right> gt
