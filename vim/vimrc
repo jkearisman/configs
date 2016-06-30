@@ -1,0 +1,94 @@
+set nocompatible
+set noswapfile
+filetype off
+syntax on
+set incsearch
+set hlsearch
+set noignorecase
+set number
+set shiftwidth=4
+set tabstop=4
+set noexpandtab
+set enc=utf-8
+set autoindent
+set smartindent
+
+"For autocompleting braces or brackets. I prefer to leave this off
+"inoremap {<CR>  {<CR>}<Esc>O
+"inoremap {}     {}
+
+"Saves me from having to press the shift key
+noremap : ;
+noremap ; :
+
+"only scroll one terminal line at a time, regardless of wrapping
+noremap j gj
+noremap k gk
+
+"Useful tab nagigating stuff
+nnoremap <Space>t :tabnew 
+nnoremap <Space>h :tabprev<cr>
+nnoremap <Space>l :tabnext<cr>
+
+"Make tabs look good, show trailing whitespace
+set listchars=tab:▒░,trail:-
+set list
+hi SpecialKey ctermfg=darkgrey
+
+set cursorline
+"set cursorcolumn
+hi CursorLine   cterm=bold ctermbg=darkgrey ctermfg=none
+hi CursorColumn cterm=bold ctermbg=none ctermfg=none
+
+"anything over the 80 character limit is
+hi OverLength ctermbg=red ctermfg=white
+match OverLength /\%81v.\+/
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'wlangstroth/vim-racket'
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/rainbow_parentheses.vim'
+call vundle#end()            " required
+filetype plugin indent on
+
+if has("autocmd")
+	au BufReadPost *.rkt,*.rktl set filetype=racket
+	au filetype racket set lisp
+	au filetype racket set autoindent
+endif
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_racket_checkers = ['racket']
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
