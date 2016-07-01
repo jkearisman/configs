@@ -56,13 +56,13 @@ git_branch_name() {
 }
 
 git_ahead() {
-	git rev-list --left-right --count master..origin/master \
-		| head -n1 | awk '{print $1;}'
+	git rev-list --left-right --count origin/master..master \
+		| head -n1 | awk '{print $2;}'
 }
 
 git_behind() {
-	git rev-list --left-right --count master..origin/master \
-		| head -n1 | awk '{print $2;}'
+	git rev-list --left-right --count origin/master..master \
+		| head -n1 | awk '{print $1;}'
 }
 
 build_git_prompt() {
