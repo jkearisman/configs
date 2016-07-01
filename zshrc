@@ -65,7 +65,7 @@ git_is_in_tree() {
 }
 
 git_is_clean() {
-	git status | grep 'clean' &>/dev/null
+	git status | grep -e '^nothing to commit, working directory clean$' &>/dev/null
 }
 
 git_behind() {
