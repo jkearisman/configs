@@ -50,6 +50,7 @@ bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
 
+# Some functions, jump to :79 to get to the interesting stuff
 in_git_tree() {
 	if [[ "true" -eq $(git rev-parse --is-inside-work-tree) ]]
 	then
@@ -59,7 +60,7 @@ in_git_tree() {
 	fi
 }
 
-git_branch() {
+git_branch_name() {
 	git branch --list | grep -e '^\*' | awk '{print $2}'
 }
 
@@ -73,8 +74,6 @@ git_behind() {
 		| head -n1 | awk '{print "-"$2;}'
 }
 
-
-#TODO: add some scm stuff to this prompt
 autoload -Uz colors && colors
 
 PROMPT='%n@%m %~ '
@@ -82,15 +81,21 @@ PROMPT='%n@%m %~ '
 if [[ in_git_tree ]]
 then
 	PROMPT=$PROMPT'%{%F{green}%}('
-	PROMPT=$PROMPT$(git_branch)' '$(git_behind)'/'$(git_ahead)
+	PROMPT=$PROMPT$(git_branch_name)' '$(git_behind)'/'$(git_ahead)
 	PROMPT=$PROMPT')%f'
 fi
 
+# Adds a newline before the final prompt character
+# Yes, this is here on purpose
+PROMPT=$PROMPT'
+'
+
 if [ $USER = "root" ]
 then
-PROMPT=$PROMPT'
-# '
+	PROMPT=$PROMPT'# '
 else
-PROMPT=$PROMPT'
-$ '
+	PROMPT=$PROMPT'$ '
 fi
+
+
+
