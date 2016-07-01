@@ -50,10 +50,47 @@ bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
 
+in_git_tree() {
+	if [[ "true" -eq $(git rev-parse --is-inside-work-tree) ]]
+	then
+		return 1
+	else
+		return 0
+	fi
+}
+
+git_branch() {
+	git branch --list | grep -e '^\*' | awk '{print $2}'
+}
+
+git_ahead() {
+	git rev-list --left-right --count master..origin/master \
+		| head -n1 | awk '{print "+"$1;}'
+}
+
+git_behind() {
+	git rev-list --left-right --count master..origin/master \
+		| head -n1 | awk '{print "-"$2;}'
+}
+
+
 #TODO: add some scm stuff to this prompt
+autoload -Uz colors && colors
+
+PROMPT='%n@%m %~ '
+
+if [[ in_git_tree ]]
+then
+	PROMPT=$PROMPT'%{%F{green}%}('
+	PROMPT=$PROMPT$(git_branch)' '$(git_behind)'/'$(git_ahead)
+	PROMPT=$PROMPT')%f'
+fi
+
 if [ $USER = "root" ]
 then
-PROMPT='%n@%m %~ # '
+PROMPT=$PROMPT'
+# '
 else
-PROMPT='%n@%m %~ $ '
+PROMPT=$PROMPT'
+$ '
 fi
