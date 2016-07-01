@@ -41,7 +41,7 @@ hi CursorLine   cterm=bold ctermbg=darkgrey ctermfg=none
 hi CursorColumn cterm=bold ctermbg=none ctermfg=none
 
 "anything over the 80 character limit is
-hi OverLength ctermbg=red ctermfg=white
+hi OverLength term=underline cterm=underline
 match OverLength /\%81v.\+/
 
 " set the runtime path to include Vundle and initialize
