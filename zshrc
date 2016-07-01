@@ -60,31 +60,50 @@ git_ahead() {
 		| head -n1 | awk '{print $2;}'
 }
 
+git_is_in_tree() {
+	git rev-parse --git-dir &>/dev/null
+}
+
+git_is_clean() {
+	git status | grep 'clean' &>/dev/null
+}
+
 git_behind() {
 	git rev-list --left-right --count origin/master..master \
 		| head -n1 | awk '{print $1;}'
 }
 
-build_git_prompt() {
+git_prompt() {
 
 	STAT=$(git rev-parse --git-dir 2>/dev/null)
 
-	if [[ -n $STAT ]]
+	if $(git_is_in_tree)
 	then
-		local GIT_PROMPT='%{%F{green}%}('$(git_branch_name)' -'$(git_behind)'/+'$(git_ahead)')%f'
+		if $(git_is_clean)
+		then
+			local GIT_PROMPT='%{%F{green}%}'
+		else
+			local GIT_PROMPT='%{%F{yellow}%}'
+		fi
+
+		local GIT_PROMPT=$GIT_PROMPT'('$(git_branch_name)' -'$(git_behind)'/+'$(git_ahead)')%f'
 		echo $GIT_PROMPT
 	fi
 
 }
 
+colorized_retcode() {
+	echo '%(?.%F{green}.%F{red})%?%f'
+}
+
+
 autoload -Uz colors && colors
 
 
-RPROMPT='%(?.%F{green}.%F{red})%?%f'
 precmd() {
 	
-
-	PROMPT='%n@%m '$(build_git_prompt)'
+	RPROMPT=$(colorized_retcode)
+	PROMPT='%n@%m '$(git_prompt)'
 %~ '
 	
 	if [ $USER = "root" ]
