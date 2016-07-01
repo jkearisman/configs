@@ -51,51 +51,46 @@ bindkey '^[[B' down-line-or-beginning-search
 
 
 # Some functions, jump to :79 to get to the interesting stuff
-in_git_tree() {
-	if [[ "true" -eq $(git rev-parse --is-inside-work-tree) ]]
-	then
-		return 1
-	else
-		return 0
-	fi
-}
-
 git_branch_name() {
 	git branch --list | grep -e '^\*' | awk '{print $2}'
 }
 
 git_ahead() {
 	git rev-list --left-right --count master..origin/master \
-		| head -n1 | awk '{print "+"$1;}'
+		| head -n1 | awk '{print $1;}'
 }
 
 git_behind() {
 	git rev-list --left-right --count master..origin/master \
-		| head -n1 | awk '{print "-"$2;}'
+		| head -n1 | awk '{print $2;}'
+}
+
+build_git_prompt() {
+
+	STAT=$(git rev-parse --git-dir 2>/dev/null)
+
+	if [[ -n $STAT ]]
+	then
+		local GIT_PROMPT='%{%F{green}%}('$(git_branch_name)' -'$(git_behind)'/+'$(git_ahead)')%f'
+		echo $GIT_PROMPT
+	fi
+
 }
 
 autoload -Uz colors && colors
 
-PROMPT='%n@%m %~ '
 
-if [[ in_git_tree ]]
-then
-	PROMPT=$PROMPT'%{%F{green}%}('
-	PROMPT=$PROMPT$(git_branch_name)' '$(git_behind)'/'$(git_ahead)
-	PROMPT=$PROMPT')%f'
-fi
+RPROMPT='%(?.%F{green}.%F{red})%?%f'
+precmd() {
+	
 
-# Adds a newline before the final prompt character
-# Yes, this is here on purpose
-PROMPT=$PROMPT'
-'
-
-if [ $USER = "root" ]
-then
-	PROMPT=$PROMPT'# '
-else
-	PROMPT=$PROMPT'$ '
-fi
-
-
-
+	PROMPT='%n@%m '$(build_git_prompt)'
+%~ '
+	
+	if [ $USER = "root" ]
+	then
+		PROMPT=$PROMPT'# '
+	else
+		PROMPT=$PROMPT'$ '
+	fi
+}
