@@ -38,11 +38,12 @@ bindsym $alt+p exec dmenu_run -l 5 -fn $font
 bindsym 0x1008ff11 exec amixer -c 1 set Master 5%-
 bindsym 0x1008ff13 exec amixer -c 1 set Master 5%+
 bindsym 0xff61     exec scrot
-bindsym $win+m exec /home/jesse/bin/muteToggle.sh
+bindsym $win+m exec $HOME/bin/muteToggle.sh
 bindsym $win+l exec i3lock -c 000000 && systemctl suspend
+bindsym $win+space exec $HOME/bin/layoutswap.sh
 
-bindsym 0x1008ff02 exec "xbacklight -inc 2"
-bindsym 0x1008ff03 exec "xbacklight -dec 2"
+bindsym 0x1008ff02 exec "xbacklight -inc 3"
+bindsym 0x1008ff03 exec "xbacklight -dec 3"
 
 
 # kill focused window
