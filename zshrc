@@ -13,6 +13,7 @@ alias pstree="pstree --unicode --show-pids"
 alias ls="ls --color"
 alias gping="ping -c 3 -i .2 google.com"
 alias l="ls -Al"
+alias la="ls -A"
 alias fox="firefox"
 alias bird="thunderbird"
 
@@ -50,46 +51,54 @@ bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
 
-# Some functions, jump to :79 to get to the interesting stuff
-git_branch_name() {
-	git branch --list | grep -e '^\*' | awk '{print $2}'
-}
+__GIT_IN_TREE="0"
+__GIT_BRANCH="master"
+__GIT_COMM_AHEAD="0"
+__GIT_COMM_BEHIND="0"
+__GIT_DIRTY="0"
+__GIT_REMOTE_EXISTS="1"
+__GIT_PROMPT=""
 
-git_ahead() {
-	git rev-list --left-right --count origin/master..master \
-		| head -n1 | awk '{print $2;}'
-}
-
-git_is_in_tree() {
-	git rev-parse --git-dir &>/dev/null
-}
-
-git_is_clean() {
-	git status | grep -e '^nothing to commit, working directory clean$' &>/dev/null
-}
-
-git_behind() {
-	git rev-list --left-right --count origin/master..master \
-		| head -n1 | awk '{print $1;}'
-}
-
-git_prompt() {
-
-	STAT=$(git rev-parse --git-dir 2>/dev/null)
-
-	if $(git_is_in_tree)
+update_git_status() {
+	if $(git rev-parse --git-dir &>/dev/null)
 	then
-		if $(git_is_clean)
+		__GIT_IN_TREE="1"
+		__GIT_BRANCH=$(git branch --list | grep -e '^\*' | awk '{print $2;}')
+		if git rev-list --left-right --count origin/$__GIT_BRANCH..$__GIT_BRANCH &>/dev/null
 		then
-			local GIT_PROMPT='%{%F{green}%}'
+			__GIT_REMOTE_EXISTS="1"
+			__GIT_COMM_BEHIND=$(git rev-list --left-right --count origin/$__GIT_BRANCH..$__GIT_BRANCH | awk '{print $1;}')
+			__GIT_COMM_AHEAD=$(git rev-list --left-right --count origin/$__GIT_BRANCH..$__GIT_BRANCH | awk '{print $2;}')
 		else
-			local GIT_PROMPT='%{%F{yellow}%}'
+			__GIT_REMOTE_EXISTS="0"
 		fi
-
-		local GIT_PROMPT=$GIT_PROMPT'('$(git_branch_name)' -'$(git_behind)'/+'$(git_ahead)')%f'
-		echo $GIT_PROMPT
+		if $(git status | grep -e \
+			'^nothing to commit, working directory clean$' &>/dev/null)
+		then
+			__GIT_DIRTY="0"
+		else
+			__GIT_DIRTY="1"
+		fi
+	else
+		__GIT_IN_TREE="0"
 	fi
 
+	#Update the git prompt based on what we found out
+	if [[ $__GIT_IN_TREE = "1" ]]
+	then
+		if [[ $__GIT_DIRTY = "0" ]]
+		then
+			__GIT_PROMPT='%{%F{green}%}'
+		else
+			__GIT_PROMPT='%{%F{yellow}%}'
+		fi
+		__GIT_PROMPT=$__GIT_PROMPT'('$__GIT_BRANCH
+		if [[ $__GIT_REMOTE_EXISTS = "1" ]]
+		then
+			__GIT_PROMPT=$__GIT_PROMPT' -'$__GIT_COMM_BEHIND'/+'$__GIT_COMM_AHEAD
+		fi
+		__GIT_PROMPT=$__GIT_PROMPT')%f'
+	fi
 }
 
 colorized_retcode() {
@@ -103,7 +112,8 @@ autoload -Uz colors && colors
 precmd() {
 	
 	RPROMPT=$(colorized_retcode)
-	PROMPT='%n@%m '$(git_prompt)'
+	update_git_status
+	PROMPT='%n@%m '$__GIT_PROMPT'
 %~ '
 	
 	if [ $USER = "root" ]
