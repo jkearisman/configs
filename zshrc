@@ -107,6 +107,7 @@ colorized_retcode() {
 
 
 autoload -Uz colors && colors
+python $HOME/bin/user_story.py
 
 
 precmd() {
