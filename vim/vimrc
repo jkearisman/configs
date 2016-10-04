@@ -12,6 +12,7 @@ set noexpandtab
 set enc=utf-8
 set autoindent
 set smartindent
+setlocal cm=blowfish2
 
 "For autocompleting braces or brackets. I prefer to leave this off
 "inoremap {<CR>  {<CR>}<Esc>O
