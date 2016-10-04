@@ -16,6 +16,7 @@ alias l="ls -Al"
 alias la="ls -A"
 alias fox="firefox"
 alias bird="thunderbird"
+alias steam="steam-native"
 
 #Completion options, tab gives a menu, up or down matches prefix in history
 zstyle ':completion:*' menu select
