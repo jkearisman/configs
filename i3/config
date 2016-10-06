@@ -31,7 +31,7 @@ client.background       #ffffff
 #------------------------------
 #Launcher section
 #------------------------------
-bindsym $win+t exec $term
+bindsym $win+t exec --no-startup-id $term
 bindsym $win+b exec $browser
 bindsym $alt+p exec dmenu_run -l 5 -fn $font
 
