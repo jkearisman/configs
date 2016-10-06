@@ -18,6 +18,14 @@ alias fox="firefox"
 alias bird="thunderbird"
 alias steam="steam-native"
 
+# Colorize less output, including man pages
+export LESS_TERMCAP_md=$'\e[01;31m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;44;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[01;32m'
+
 #Completion options, tab gives a menu, up or down matches prefix in history
 zstyle ':completion:*' menu select
 
@@ -50,6 +58,8 @@ setopt HIST_IGNORE_DUPS
 
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
+
+
 
 
 __GIT_IN_TREE="0"
@@ -99,6 +109,8 @@ update_git_status() {
 			__GIT_PROMPT=$__GIT_PROMPT' -'$__GIT_COMM_BEHIND'/+'$__GIT_COMM_AHEAD
 		fi
 		__GIT_PROMPT=$__GIT_PROMPT')%f'
+	else
+		__GIT_PROMPT=""
 	fi
 }
 
