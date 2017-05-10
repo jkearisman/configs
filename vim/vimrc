@@ -14,13 +14,14 @@ set autoindent
 set smartindent
 setlocal cm=blowfish2
 
+" disable F1 help key, map it to esc
+nmap <F1> <nop>
+map <F1> <Esc>
+imap <F1> Esc>
+
 "For autocompleting braces or brackets. I prefer to leave this off
 "inoremap {<CR>  {<CR>}<Esc>O
 "inoremap {}     {}
-
-"Saves me from having to press the shift key
-noremap : ;
-noremap ; :
 
 "only scroll one terminal line at a time, regardless of wrapping
 noremap j gj
@@ -30,9 +31,12 @@ noremap k gk
 nnoremap <Space>t :tabnew 
 nnoremap <Space>h :tabprev<cr>
 nnoremap <Space>l :tabnext<cr>
+nnoremap <Space>w :w<cr>
+nnoremap <Space>x :x<cr>
 
 "Make tabs look good, show trailing whitespace
 set listchars=tab:▒░,trail:-
+"set listchars=tab:,trail:-
 set list
 hi SpecialKey ctermfg=darkgrey
 
@@ -41,19 +45,24 @@ set cursorline
 hi CursorLine   cterm=bold ctermbg=darkgrey ctermfg=none
 hi CursorColumn cterm=bold ctermbg=none ctermfg=none
 
-"anything over the 80 character limit is
+"anything over the 80 character limit should be underlined
 hi OverLength term=underline cterm=underline
 match OverLength /\%81v.\+/
+
+" Enable searching for files in subdirectories
+set path+=**
+set wildmenu
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
+"
+"
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'wlangstroth/vim-racket'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/rainbow_parentheses.vim'
 call vundle#end()            " required
