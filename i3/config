@@ -9,7 +9,7 @@ set $win Mod4
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-set $font "pango:Hack 8"
+set $font "pango:Hack 8,Awesome 8"
 font $font
 new_window pixel 3
 workspace_auto_back_and_forth no
@@ -33,7 +33,7 @@ client.background       #ffffff
 #------------------------------
 bindsym $win+t exec --no-startup-id $term
 bindsym $win+b exec $browser
-bindsym $alt+p exec dmenu_run -l 5 -fn $font
+bindsym $alt+p exec dmenu_run -l 5 -fn "pango:Hack 8"
 
 bindsym 0x1008ff11 exec amixer -c 1 set Master 5%-
 bindsym 0x1008ff13 exec amixer -c 1 set Master 5%+
@@ -152,8 +152,15 @@ mode "resize" {
 
 bindsym $alt+r mode "resize"
 
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status -c ~/.i3/i3status.conf
+	#font $font
+	font pango:Hack 8, FontAwesome 8
+	#status_command i3status -c ~/.i3/i3status.conf
+	status_command i3blocks -c ~/.i3/i3blocks.conf
+	mode hide
+	hidden_state hide
+	modifier $alt
 }

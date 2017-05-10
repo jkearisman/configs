@@ -1,0 +1,72 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+separator_block_width=15
+markup=none
+
+[weather]
+command=python ~/bin/darksky.py
+interval=600
+#Every 10 minutes
+
+[keymap]
+command=~/bin/keymap.sh
+interval=5
+
+[temp]
+command=~/bin/temp.sh
+interval=5
+separator=true
+markup=pango
+
+[volume]
+command=~/bin/volperc.sh
+interval=5
+markup=pango
+
+
+# If the instance is not specified, use the interface used for default route.
+[iface]
+command=/usr/lib/i3blocks/iface
+color=#00FF00
+interval=10
+separator=true
+
+
+[battery]
+command=~/bin/bat.sh
+markup=pango
+interval=30
+
+[date]
+command=date '+ %Y-%m-%d'
+interval=60
+separator=false
+
+[time]
+command=date '+ %H:%M:%S'
+interval=1
+
