@@ -1,0 +1,14 @@
+redshift
+python-requests
+xorg-server
+xorg-xinit
+i3-wm
+i3blocks
+i3lock
+zsh
+git
+alsa-utils
+feh
+youtube-dl
+thunderbird
+firefox
