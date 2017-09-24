@@ -160,7 +160,6 @@ bar {
 	font pango:Hack 8, FontAwesome 8
 	#status_command i3status -c ~/.i3/i3status.conf
 	status_command i3blocks -c ~/.i3/i3blocks.conf
-	mode hide
-	hidden_state hide
+	mode dock
 	modifier $alt
 }

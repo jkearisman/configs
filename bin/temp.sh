@@ -1,4 +1,4 @@
-TEMPC=$(sensors coretemp-isa-0000 | awk '/Package id 0/ {print $4}' | cut -b2- | bc )
+TEMPC=$(sensors acpitz-virtual-0 | awk '/temp1/ {print $2}' | cut -b2- | bc )
 if [[ ${TEMPC%.*} -ge 80 ]]
 then
 echo "<span color='#ff0000'> $TEMPC °C</span>"

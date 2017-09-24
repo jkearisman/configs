@@ -5,10 +5,9 @@ export WINEARCH=win32
 setopt DVORAK
 
 #some helpful aliases
-alias alsamixer="alsamixer -c 1"
-alias nvida-settings="optirun -b none nvidia-settings -c :8"
+#alias alsamixer="alsamixer -c 1"
 alias vim="vim -p"
-alias dolphin-emu="cd ~/.dolphin-emu/Wii && primusrun dolphin-emu"
+#alias dolphin-emu="cd ~/.dolphin-emu/Wii && primusrun dolphin-emu"
 alias pstree="pstree --unicode --show-pids"
 alias ls="ls --color"
 alias gping="ping -c 3 -i .2 google.com"
@@ -17,6 +16,7 @@ alias la="ls -A"
 alias fox="firefox"
 alias bird="thunderbird"
 alias steam="steam-native"
+alias pacman=pacaur
 
 # Colorize less output, including man pages
 export LESS_TERMCAP_md=$'\e[01;31m'
