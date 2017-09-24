@@ -7,6 +7,7 @@ setopt DVORAK
 #some helpful aliases
 alias alsamixer="alsamixer -c 1"
 alias nvida-settings="optirun -b none nvidia-settings -c :8"
+# use tabbed vim over buffered vim
 alias vim="vim -p"
 alias dolphin-emu="cd ~/.dolphin-emu/Wii && primusrun dolphin-emu"
 alias pstree="pstree --unicode --show-pids"
@@ -17,6 +18,10 @@ alias la="ls -A"
 alias fox="firefox"
 alias bird="thunderbird"
 alias steam="steam-native"
+alias youtube-album-dl="youtube-dl -x -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' --recode-video ogg"
+alias pacman="pacaur"
+
+stty -ixon # Ctrl+S won't lock up the terminal
 
 # Colorize less output, including man pages
 export LESS_TERMCAP_md=$'\e[01;31m'
@@ -62,6 +67,7 @@ bindkey '^[[B' down-line-or-beginning-search
 
 
 
+# Custom git status, probably vulnerable to https://github.com/njhartwell/pw3nage
 __GIT_IN_TREE="0"
 __GIT_BRANCH="master"
 __GIT_COMM_AHEAD="0"

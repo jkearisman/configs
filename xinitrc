@@ -5,7 +5,7 @@ exec xset s off&
 exec xset -dpms&
 exec udiskie&
 exec ~/bin/screenfind.sh &
-exec ~/bin/wallpaper.sh &
+#exec ~/bin/wallpaper.sh &
 exec nm-applet&
 exec i3
 cd -
