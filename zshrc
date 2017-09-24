@@ -7,7 +7,6 @@ setopt DVORAK
 #some helpful aliases
 #alias alsamixer="alsamixer -c 1"
 alias vim="vim -p"
-#alias dolphin-emu="cd ~/.dolphin-emu/Wii && primusrun dolphin-emu"
 alias pstree="pstree --unicode --show-pids"
 alias ls="ls --color"
 alias gping="ping -c 3 -i .2 google.com"
