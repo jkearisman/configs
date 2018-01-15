@@ -25,36 +25,29 @@ function mkdir_if_dne {
 	fi
 }
 
-function rm_if_e {
-	if [[ -e $1 || -d $1 ]]
-	then
-		rm -r $1
-	fi
-}
 
 #vim
-rm_if_e $HOME/.vim
+rm -rf $HOME/.vim
 ln -s $PWD/vim $HOME/.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
-
-rm_if_e $HOME/.xinitrc
+rm -rf $HOME/.xinitrc
 ln -s $PWD/xinitrc $HOME/.xinitrc
 
-rm_if_e $HOME/bin
+rm -rf $HOME/bin
 ln -s $PWD/bin $HOME/bin
 
-rm_if_e $HOME/.i3
+rm -rf $HOME/.i3
 ln -s $PWD/i3 $HOME/.i3
 
-rm_if_e $HOME/.vimperatorrc
+rm -rf $HOME/.vimperatorrc
 ln -s $PWD/vimperatorrc $HOME/.vimperatorrc
 
-rm_if_e $HOME/.zshrc
+rm -rf $HOME/.zshrc
 ln -s $PWD/zshrc $HOME/.zshrc
 
 mkdir_if_dns $HOME/.config
 mkdir_if_dne $HOME/.config/lilyterm
-rm_if_e $HOME/.config/lilyterm/default.conf
+rm -rf $HOME/.config/lilyterm/default.conf
 ln -s $PWD/lilyterm/default.conf $HOME/.config/lilyterm/default.conf

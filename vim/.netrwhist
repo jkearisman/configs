@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/jesse/.config/lilyterm'
+let g:netrw_dirhist_2='/home/jesse/dev/thunderhead/jdeserialize/jdeserialize/build'
+let g:netrw_dirhist_3='/sys/class/backlight/intel_backlight'
+let g:netrw_dirhist_4='/home/jesse/.gnupg'
+let g:netrw_dirhist_5='/home/jesse/dev/astam3'

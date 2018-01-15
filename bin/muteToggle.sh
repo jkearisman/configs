@@ -1,16 +1,16 @@
 #!/usr/bin/bash
 
-VOL=$(amixer -c 1 get Master | grep -o 'off')
+VOL=$(amixer get Master | grep -o 'off')
 
 if [ -n "$VOL" ]
 then
-	amixer -c 1 set Master unmute
-	amixer -c 1 set Headphone unmute
-	amixer -c 1 set Speaker unmute
+	amixer set Master unmute
+	amixer set Headphone unmute
+	amixer set Speaker unmute
 else
-	amixer -c 1 set Master mute
-	amixer -c 1 set Headphone mute
-	amixer -c 1 set Speaker mute
+	amixer set Master mute
+	amixer set Headphone mute
+	amixer set Speaker mute
 fi
 
 #exec $HOME/bin/updateXroot.sh

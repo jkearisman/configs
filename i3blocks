@@ -55,12 +55,19 @@ color=#00FF00
 interval=10
 separator=true
 
+[battery]
+command=~/bin/bat.sh
+interval=60
+markup=pango
+
 [date]
-command=date '+ %Y-%m-%d'
+command=date '+📅 %Y-%m-%d'
 interval=60
 separator=false
 
 [time]
-command=date '+ %H:%M:%S'
+command=date '+⏰ %H:%M:%S'
 interval=1
+
+
 

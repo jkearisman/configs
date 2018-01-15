@@ -5,7 +5,8 @@ export WINEARCH=win32
 setopt DVORAK
 
 #some helpful aliases
-#alias alsamixer="alsamixer -c 1"
+alias alsamixer="alsamixer -c 0"
+alias nvida-settings="optirun -b none nvidia-settings -c :8"
 alias vim="vim -p"
 alias pstree="pstree --unicode --show-pids"
 alias ls="ls --color"
@@ -19,6 +20,15 @@ alias pacman="pacaur"
 alias youtube-album-dl="youtube-dl -x -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' --recode-video ogg"
 
 stty -ixon # Ctrl+S won't lock up the terminal
+function todo() {
+	if [[ $1 ]]
+	then
+		echo $@ >> ~/in.txt
+	fi
+}
+function showtodo() {
+	cat ~/in.txt
+}
 
 # Colorize less output, including man pages
 export LESS_TERMCAP_md=$'\e[01;31m'
@@ -123,7 +133,6 @@ colorized_retcode() {
 
 
 autoload -Uz colors && colors
-python $HOME/bin/user_story.py
 
 
 precmd() {

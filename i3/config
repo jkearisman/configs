@@ -7,23 +7,34 @@ set $win Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
 set $font "pango:Hack 8,Awesome 8"
 font $font
 new_window pixel 3
 workspace_auto_back_and_forth no
 
 
+#   let s:base1       = "#93a1a1" // optional emph
+#   let s:base0       = "#839496" // body/primary
+#   let s:base01      = "#586e75" // comments/secondary
+#   let s:base02      = "#073642" // background hilights
+#   let s:base03      = "#002b36" // background
+#   let s:yellow      = "#b58900"
+#   let s:orange      = "#cb4b16"
+#   let s:red         = "#dc322f"
+#   let s:magenta     = "#d33682"
+#   let s:violet      = "#6c71c4"
+#   let s:blue        = "#268bd2"
+#   let s:cyan        = "#2aa198"
+#   let s:green       = "#719e07" "experimental
 
-#color scheme (this is the default
+#color scheme (this is the default)
+# anything we don't care about will just be an annoying magentra
 #                       border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
+client.focused          #ff00ff #073642 #839496 #586e75   #839496
+client.focused_inactive #333333 #002b36 #839496 #073642   #073642
+client.unfocused        #333333 002b36: #888888 0736424   #002b36
+client.urgent           #2f343a #dc322f #839496 #900000   #900000
+client.placeholder      #000000 #0c0c0c #839496 #000000   #0c0c0c
 client.background       #ffffff
 
 
@@ -35,15 +46,12 @@ bindsym $win+t exec --no-startup-id $term
 bindsym $win+b exec $browser
 bindsym $alt+p exec dmenu_run -l 5 -fn "pango:Hack 8"
 
-bindsym 0x1008ff11 exec amixer -c 1 set Master 5%-
-bindsym 0x1008ff13 exec amixer -c 1 set Master 5%+
-bindsym 0xff61     exec scrot
+bindsym 0x1008ff11 exec amixer -c 0 set Master 5%-
+bindsym 0x1008ff13 exec amixer -c 0 set Master 5%+
+bindsym 0xff61     exec scrot -u "$HOME/img/screenshots/%s.png"
 bindsym $win+m exec $HOME/bin/muteToggle.sh
-bindsym $win+l exec i3lock -c 000000 && systemctl suspend
+bindsym $win+l exec i3lock -c 000000
 bindsym $win+space exec $HOME/bin/layoutswap.sh
-
-bindsym 0x1008ff02 exec "xbacklight -inc 3"
-bindsym 0x1008ff03 exec "xbacklight -dec 3"
 
 
 # kill focused window
@@ -104,7 +112,7 @@ bindsym $alt+7 workspace 7
 bindsym $alt+8 workspace 8
 bindsym $alt+9 workspace 9
 bindsym $alt+0 workspace dennis
-# Ye arrive at Dennis. He wears a sporty frock coat and a long jimberjam. 
+# Ye arrive at Dennis. He wears a sporty frock coat and a long jimberjam.
 # He paces about nervously. Obvious exits are NOT DENNIS.
 
 bindsym $alt+Left workspace prev
@@ -157,9 +165,8 @@ bindsym $alt+r mode "resize"
 # finds out, if available)
 bar {
 	#font $font
-	font pango:Hack 8, FontAwesome 8
+	font pango:Hack 8,FontAwesome 8
 	#status_command i3status -c ~/.i3/i3status.conf
 	status_command i3blocks -c ~/.i3/i3blocks.conf
 	mode dock
-	modifier $alt
 }

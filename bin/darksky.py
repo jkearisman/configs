@@ -16,21 +16,23 @@ def pull_temp( resp_json):
 
 def pull_symbol( resp_json):
 
-    sun =''
-    snowflake = ''
-    shower = ''
-    cloud = ''
-    moon = ''
+    sun ='☼'
+    snowflake ='❄️'
+    shower = '🚿'
+    cloud = '☁️'
+    part_cloud = '⛅'
+    moon = '🌙'
+    wind='🍃'
     icon_dict = { 
             'clear-day':sun,
             'clear-night':moon,
             'rain':shower,
             'snow':snowflake,
             'sleet':'sleet',
-            'wind':'wind',
+            'wind':wind,
             'fog':'foggy',
             'cloudy':cloud,
-            'partly-cloudy-day':sun,
+            'partly-cloudy-day':part_cloud,
             'partly-cloudy-night':moon
             }
 
@@ -49,7 +51,6 @@ key = "b131d87540ab9c8fb0443d7944f22c5e"
 
 lat = "42.995701"
 lon = "-71.468160"
-
 
 
 request = "https://api.darksky.net/forecast/{}/{},{}".format(

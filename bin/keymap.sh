@@ -3,8 +3,8 @@ VARIANT=$(setxkbmap -query | awk '/variant/ {print $2}' | cut -b-2)
 
 if [[ -n $VARIANT ]]
 then
-	echo  $VARIANT
+	echo ⌨️ $VARIANT
 else
-	echo  $LAYOUT
+	echo ⌨️ $LAYOUT
 fi
 

@@ -13,7 +13,6 @@ set enc=utf-8
 set autoindent
 set smartindent
 setlocal cm=blowfish2
-
 " disable F1 help key, map it to esc
 nmap <F1> <nop>
 map <F1> <Esc>
@@ -59,14 +58,12 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 "
-"
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/rainbow_parentheses.vim'
 call vundle#end()            " required
-filetype plugin indent on
 
 if has("autocmd")
 	au BufReadPost *.rkt,*.rktl set filetype=racket
@@ -79,6 +76,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_racket_checkers = ['racket']
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "passive_filetypes": ["java"] }
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
     \ ['Darkblue',    'SeaGreen3'],
