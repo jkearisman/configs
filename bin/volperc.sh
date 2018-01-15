@@ -1,9 +1,9 @@
+CARDNUM=0
 
-
-MASTER=$(amixer -c 0 get Master | grep -m 1 -oE '[0-9]+%')
+MASTER=$(amixer -c ${CARDNUM} get Master | grep -m 1 -oE '[0-9]+%')
 MASTER=${MASTER::-1}
-HEADPHONE=$(amixer -c 0 get Headphone | grep '\[on\]')
-SPEAKER=$(amixer -c 0 get Speaker+LO | grep '\[on\]')
+HEADPHONE=$(amixer -c ${CARDNUM} get Headphone | grep '\[on\]')
+SPEAKER=$(amixer -c ${CARDNUM} get Speaker+LO | grep '\[on\]')
 
 if [[ -n $HEADPHONE ]]
 then

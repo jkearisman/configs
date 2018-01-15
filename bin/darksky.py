@@ -45,8 +45,10 @@ def pull_symbol( resp_json):
         return '?'
 
 key = "b131d87540ab9c8fb0443d7944f22c5e"
-lat = "44.490806"
-lon = "-73.111166"
+ 
+
+lat = "42.995701"
+lon = "-71.468160"
 
 
 
