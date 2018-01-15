@@ -1,15 +1,22 @@
 
-VOLMUTE=$(amixer -c 1 get Master | grep 'off')
 
-MASTER=$(amixer -c 1 get Master | grep -oE '[0-9]+%' | head -n 1)
-HEADPHONE=$(amixer -c 1 get Headphone | grep 'off')
-if [[ -n $VOLMUTE ]]
+MASTER=$(amixer -c 0 get Master | grep -m 1 -oE '[0-9]+%')
+MASTER=${MASTER::-1}
+HEADPHONE=$(amixer -c 0 get Headphone | grep '\[on\]')
+SPEAKER=$(amixer -c 0 get Speaker+LO | grep '\[on\]')
+
+if [[ -n $HEADPHONE ]]
 then
-	echo "<span color='yellow'> $MASTER</span>"
-elif [[ -n $HEADPHONE ]]
+	echo "${MASTER}% 🎧"
+elif [[ ! -n $SPEAKER ]]
 then
-	echo " $MASTER"
+	echo "<span color='yellow'>${MASTER}% 🔇</span>"
+elif [[ $MASTER -gt 50 ]]
+then
+	echo "${MASTER}% 🔊"
+elif [[ $MASTER -gt 25 ]]
+then
+	echo "${MASTER}% 🔉"
 else
-	echo " $MASTER"
+	echo "${MASTER}% 🔈"
 fi
-
