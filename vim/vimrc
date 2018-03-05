@@ -25,6 +25,8 @@ imap <F1> Esc>
 "only scroll one terminal line at a time, regardless of wrapping
 noremap j gj
 noremap k gk
+noremap K i<Return><Esc>
+
 
 "Useful tab nagigating stuff
 nnoremap <Space>t :tabnew 
