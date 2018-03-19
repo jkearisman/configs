@@ -1,4 +1,4 @@
-WALLPAPER_DIR=${${HOME}/img/wallpapers}
+WALLPAPER_DIR=${HOME}/img/wallpapers/
 while true
 	do
 		feh --bg-max -z ${WALLPAPER_DIR}

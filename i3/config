@@ -46,8 +46,8 @@ bindsym $win+t exec --no-startup-id $term
 bindsym $win+b exec $browser
 bindsym $alt+p exec dmenu_run -l 5 -fn "pango:Hack 8"
 
-bindsym 0x1008ff11 exec amixer -c 0 set Master 5%-
-bindsym 0x1008ff13 exec amixer -c 0 set Master 5%+
+bindsym $alt+Left exec amixer -c 0 set Master 5%-
+bindsym $alt+Right exec amixer -c 0 set Master 5%+
 bindsym 0xff61     exec scrot -u "$HOME/img/screenshots/%s.png"
 bindsym $win+m exec $HOME/bin/muteToggle.sh
 bindsym $win+l exec i3lock -c 000000
@@ -115,8 +115,6 @@ bindsym $alt+0 workspace dennis
 # Ye arrive at Dennis. He wears a sporty frock coat and a long jimberjam.
 # He paces about nervously. Obvious exits are NOT DENNIS.
 
-bindsym $alt+Left workspace prev
-bindsym $alt+Right workspace next
 
 # move focused container to workspace
 bindsym $alt+Shift+1 move container to workspace 1
@@ -165,7 +163,7 @@ bindsym $alt+r mode "resize"
 # finds out, if available)
 bar {
 	#font $font
-	font pango:Hack 8,FontAwesome 8
+	font pango:Hack 8
 	#status_command i3status -c ~/.i3/i3status.conf
 	status_command i3blocks -c ~/.i3/i3blocks.conf
 	mode dock

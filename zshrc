@@ -6,7 +6,6 @@ setopt DVORAK
 
 #some helpful aliases
 alias alsamixer="alsamixer -c 0"
-alias nvida-settings="optirun -b none nvidia-settings -c :8"
 alias vim="vim -p"
 alias pstree="pstree --unicode --show-pids"
 alias ls="ls --color"
@@ -18,6 +17,15 @@ alias bird="thunderbird"
 alias steam="steam-native"
 alias pacman="pacaur"
 alias youtube-album-dl="youtube-dl -x -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' --recode-video ogg"
+function findsym() {
+	find . -type f -exec grep -l $1 {} \;
+}
+function todo() {
+	if [[ $1 ]]
+	then
+		echo $@ >> ~/todo.txt
+	fi
+}
 
 stty -ixon # Ctrl+S won't lock up the terminal
 function todo() {

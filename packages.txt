@@ -5,6 +5,7 @@ xorg-xinit
 i3-wm
 i3blocks
 i3lock
+ttf-font-awesome
 zsh
 git
 alsa-utils
